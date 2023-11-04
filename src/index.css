@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-main-spacing {
+  @apply max-w-7xl mx-auto;
+}
+
+.btn {
+  @apply rounded-[3px] h-full min-h-[35px] font-normal;
+}
