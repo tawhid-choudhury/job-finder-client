@@ -3,8 +3,33 @@ import Logo from "../../sharedComponents/Navbar/Logo";
 import StaticBanner from "../../sharedComponents/Navbar/StaticBanner";
 import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet-async";
+import { Input } from "@material-tailwind/react";
+import { useState } from "react";
 
 const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [asterisks, setAsterisks] = useState("");
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        const enteredPassword = e.target.value;
+        const maskedPassword = '*'.repeat(enteredPassword.length);
+        setPassword(enteredPassword);
+        setAsterisks(maskedPassword);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // You can access the email and password values here
+        console.log("Email:", email);
+        console.log("Password:", password);
+    };
+
+
     return (
         <div className="relative">
             <Helmet>
@@ -20,27 +45,45 @@ const Login = () => {
                         <h1 className="text-3xl text-primary flex items-center justify-center pt-[30px] ">
                             Login to your account
                         </h1>
-                        <form className="card-body">
+                        <form className="card-body space-y-4" onSubmit={handleSubmit}>
                             <div className="form-control">
-                                <label className="label">
+                                {/* <label className="label">
                                     <span className="label-text">Email</span>
-                                </label>
-                                <input type="email" placeholder="email" className="input input-bordered" required />
+                                </label> */}
+
+                                <Input
+                                    variant="standard"
+                                    label="Email"
+                                    value={email}
+                                    onChange={handleEmailChange}
+                                />
+                                {/* <input name="email" type="email" placeholder="email" className="input input-bordered" required /> */}
+
+
                             </div>
                             <div className="form-control">
-                                <label className="label">
+                                {/* <label className="label">
                                     <span className="label-text">Password</span>
-                                </label>
-                                <input type="password" placeholder="password" className="input input-bordered" required />
+                                </label> */}
+                                <Input
+                                    variant="standard"
+                                    label="Password"
+                                    // type="password"
+                                    value={asterisks}
+                                    onChange={handlePasswordChange}
+                                />
+
+                                {/* <input name="password" type="password" placeholder="password" className="input input-bordered" required /> */}
+
+                                {/* 
                                 <label className="label">
-                                    {/* <a href="#" className="label-text-alt link link-hover">Forgot password?</a> */}
-                                </label>
+                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                </label> */}
                             </div>
                             <div className="form-control mt-6">
                                 <input type="submit" value={"Login"} className="btn btn-primary" />
                             </div>
                             <div className="flex flex-col items-center justify-center">
-                                <p className="my-4">or</p>
                                 <div className="w-full">
                                     <button className="btn btn-primary btn-outline btn-block flex"><span className="text-2xl"><FcGoogle></FcGoogle></span><span className="flex-1">Login with google</span></button>
                                 </div>
