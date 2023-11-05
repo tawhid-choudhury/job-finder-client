@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Logo from "../../sharedComponents/Navbar/Logo";
-import StaticBanner from "../../sharedComponents/Navbar/StaticBanner";
+import Logo from "../../sharedComponents/Logo";
+import StaticBanner from "../../sharedComponents/StaticBanner";
 import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet-async";
 import { Input } from "@material-tailwind/react";

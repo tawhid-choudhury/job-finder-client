@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Logo from "../../sharedComponents/Navbar/Logo";
-import StaticBanner from "../../sharedComponents/Navbar/StaticBanner";
+import Logo from "../../sharedComponents/Logo";
+// import StaticBanner from "../../sharedComponents/StaticBanner";
 import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet-async";
 import { Input, Typography } from "@material-tailwind/react";
@@ -63,24 +63,24 @@ const SignUp = () => {
             <Helmet>
                 <title>Job Finder | Sign Up</title>
             </Helmet>
-            <StaticBanner height={"100vh"}></StaticBanner>
-            <div className="flex flex-col gap-5 items-center justify-center min-w-full min-h-screen top-0 p-2">
-                <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mt-32 ">
+            {/* <StaticBanner></StaticBanner> */}
+            <div className="flex flex-col gap-5 items-center justify-center min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-500 via-success to-primary animate-gradient top-0 px-2">
+                <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mt-10 ">
                     <form className="card-body space-y-4" onSubmit={handleSubmit}>
-                        <div className="pt-7">
+                        <div className="pt-3 hidden lg:block">
                             <Logo></Logo>
                         </div>
-                        <h1 className="text-3xl text-primary flex items-center justify-center pt-[30px] ">
+                        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary flex items-center justify-center ">
                             Create a new Account
                         </h1>
-                        <div className={`flex flex-col justify-center items-center mt-5 ${avater ? "" : "hidden"}`}>
+                        <div className={`flex flex-col text-sm justify-center items-center mt-2 ${avater ? "" : "hidden"}`}>
                             <h1>Photo Preview</h1>
                             <div className={`flex flex-col items-center justify-center avatar ${imageloaded ? "" : "hidden"}`}>
-                                <div className={`w-24 rounded-full `}>
+                                <div className={`w-20 rounded-full `}>
                                     <img onLoad={() => setImageloaded(true)} src={photoUrl} />
                                 </div>
                             </div>
-                            <div className={`flex flex-col items-center justify-center mt-5 ${imageloaded ? "hidden" : ""}`}>
+                            <div className={`flex flex-col items-center justify-center mt-2 ${imageloaded ? "hidden" : ""}`}>
                                 <div>
                                     <span className="loading loading-spinner text-primary text-3xl loading-lg"></span>
                                 </div>
@@ -193,7 +193,7 @@ const SignUp = () => {
                             </div>
                         </div>
                         <div className="flex items-center justify-center">
-                            <p className="text-center">Already have an account? <Link to={"/login"}><span className=" text-primary underline hover:text-secondary">Login instead</span></Link></p></div>
+                            <p className="text-center text-sm">Already have an account? <Link to={"/login"}><span className=" text-primary underline hover:text-secondary">Login instead</span></Link></p></div>
                     </form>
                 </div>
             </div>
