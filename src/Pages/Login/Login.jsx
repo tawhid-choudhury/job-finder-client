@@ -4,12 +4,23 @@ import StaticBanner from "../../sharedComponents/Navbar/StaticBanner";
 import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet-async";
 import { Input } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [asterisks, setAsterisks] = useState("");
+    const [credentialsOk, setCredentialsOk] = useState(true);
+
+    useEffect(() => {
+        const handleContextmenu = e => {
+            e.preventDefault()
+        }
+        document.addEventListener('contextmenu', handleContextmenu)
+        return function cleanup() {
+            document.removeEventListener('contextmenu', handleContextmenu)
+        }
+    }, [])
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -17,16 +28,24 @@ const Login = () => {
 
     const handlePasswordChange = (e) => {
         const enteredPassword = e.target.value;
+        if (enteredPassword.length > password.length) {
+            const lastletter = enteredPassword.charAt(enteredPassword.length - 1);
+            setPassword(`${password}${lastletter}`);
+        }
+        if (enteredPassword.length < password.length) {
+            const str = password.substring(0, enteredPassword.length);
+            setPassword(`${str}`);
+        }
         const maskedPassword = '*'.repeat(enteredPassword.length);
-        setPassword(enteredPassword);
         setAsterisks(maskedPassword);
+    };
+    const handlePreventCopyPaste = (e) => {
+        e.preventDefault();
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // You can access the email and password values here
-        console.log("Email:", email);
-        console.log("Password:", password);
+        console.log(email, password);
     };
 
 
@@ -47,38 +66,24 @@ const Login = () => {
                         </h1>
                         <form className="card-body space-y-4" onSubmit={handleSubmit}>
                             <div className="form-control">
-                                {/* <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label> */}
-
                                 <Input
                                     variant="standard"
                                     label="Email"
                                     value={email}
                                     onChange={handleEmailChange}
                                 />
-                                {/* <input name="email" type="email" placeholder="email" className="input input-bordered" required /> */}
-
-
                             </div>
                             <div className="form-control">
-                                {/* <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label> */}
                                 <Input
                                     variant="standard"
                                     label="Password"
-                                    // type="password"
                                     value={asterisks}
                                     onChange={handlePasswordChange}
+                                    color={credentialsOk ? "gray" : "red"}
+                                    onCut={handlePreventCopyPaste}
+                                    onCopy={handlePreventCopyPaste}
+                                    onPaste={handlePreventCopyPaste}
                                 />
-
-                                {/* <input name="password" type="password" placeholder="password" className="input input-bordered" required /> */}
-
-                                {/* 
-                                <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                                </label> */}
                             </div>
                             <div className="form-control mt-6">
                                 <input type="submit" value={"Login"} className="btn btn-primary" />

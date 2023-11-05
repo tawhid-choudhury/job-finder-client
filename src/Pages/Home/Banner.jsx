@@ -16,6 +16,7 @@ const Banner = () => {
                 <div className="flex flex-col items-center justify-center h-full text-white">
                     <h1 className=" text-lg sm:text-xl md:text-3xl lg:text-4xl text-center">We are the best job provider in the country!</h1>
                     <p className="mt-11">Find the job that your heart desires</p>
+
                 </div>
             </div>
         </div>
