@@ -16,3 +16,13 @@
 .active {
   @apply underline bg-none;
 }
+.text-heading-custom {
+  @apply text-4xl;
+}
+
+.animate-gradient {
+  background-size: 300%;
+  -webkit-animation: animatedgradient 20s ease infinite alternate;
+  -moz-animation: animatedgradient 20s ease infinite alternate;
+  animation: animatedgradient 20s ease infinite alternate;
+}

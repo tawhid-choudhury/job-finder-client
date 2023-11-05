@@ -6,7 +6,7 @@ import Logo from "./Logo";
 
 const Navbar = () => {
     return (
-        <div className="bg-base-300 absolute w-full bg-opacity-0 text-gray-300 z-20">
+        <div className="bg-base-300 absolute w-full bg-opacity-0 text-base-100 z-20 navbar-sty">
             <div className="navbar custom-main-spacing">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -19,13 +19,13 @@ const Navbar = () => {
                             <li><NavLink to="/" className="navItem">Home</NavLink></li>
                             <li><NavLink to="/alljobs" className="navItem">All Jobs</NavLink></li>
                             <li><NavLink to="/appliedjobs" className="navItem">Applied Jobs</NavLink></li>
-                            <li><NavLink to="/addajob" className="navItem">Add A Job</NavLink></li>
+                            <li><NavLink to="/addajob" className="navItem">Add a Job</NavLink></li>
                             <li><NavLink to="/myjobs" className="navItem">My Jobs</NavLink></li>
                             <li><NavLink to="/blogs" className="navItem">Blogs</NavLink></li>
                             {/* <li><NavLink to="/profile" className="navItem">Home</NavLink></li> */}
                         </ul>
                     </div>
-                    <div>
+                    <div className="mr-6">
                         <Logo></Logo>
                     </div>
 
@@ -34,7 +34,7 @@ const Navbar = () => {
                             <li><NavLink to="/" className="navItem">Home</NavLink></li>
                             <li><NavLink to="/alljobs" className="navItem">All Jobs</NavLink></li>
                             <li><NavLink to="/appliedjobs" className="navItem">Applied Jobs</NavLink></li>
-                            <li><NavLink to="/addajob" className="navItem">Add A Job</NavLink></li>
+                            <li><NavLink to="/addajob" className="navItem">Add a Job</NavLink></li>
                             <li><NavLink to="/myjobs" className="navItem">My Jobs</NavLink></li>
                             <li><NavLink to="/blogs" className="navItem">Blogs</NavLink></li>
                             {/* <li><NavLink to="/profile" className="hover:text-primary">Item 1</NavLink></li> */}
