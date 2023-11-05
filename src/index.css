@@ -3,9 +3,16 @@
 @tailwind utilities;
 
 .custom-main-spacing {
-  @apply max-w-7xl mx-auto;
+  @apply max-w-[1600px] mx-auto;
 }
 
 .btn {
   @apply rounded-[3px] h-full min-h-[35px] font-normal;
+}
+
+.navItem {
+  @apply hover:text-primary;
+}
+.active {
+  @apply underline bg-none;
 }
