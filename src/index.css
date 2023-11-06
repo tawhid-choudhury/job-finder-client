@@ -26,3 +26,10 @@
   -moz-animation: animatedgradient 20s ease infinite alternate;
   animation: animatedgradient 20s ease infinite alternate;
 }
+
+.animate-gradient-banner-home {
+  background-size: 125%;
+  -webkit-animation: animatedgradient 30s ease infinite alternate;
+  -moz-animation: animatedgradient 30s ease infinite alternate;
+  animation: animatedgradient 30s ease infinite alternate;
+}

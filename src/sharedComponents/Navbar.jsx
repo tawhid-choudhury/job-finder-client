@@ -76,7 +76,7 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </Tooltip>
-                        <button onClick={handleLogout} className={`btn btn-warning btn-outline ${!user && "hidden"}`}>Log Out</button>
+                        <button onClick={handleLogout} className={`btn btn-primary btn-outline ${!user && "hidden"}`}>Log Out</button>
 
                         <button><NavLink to='/login' className={`btn btn-primary ${user && "hidden"}`}>Login</NavLink></button>
                         <h3 className={`${user && "hidden"}`}>or</h3>

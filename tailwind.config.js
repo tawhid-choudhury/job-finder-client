@@ -17,6 +17,11 @@ module.exports = withMT({
           "50%": { backgroundPosition: "100% 50%" },
           "100%": { backgroundPosition: "0% 50%" },
         },
+        animatedgradientii: {
+          "0%": { backgroundPosition: "50% 0%" },
+          "50%": { backgroundPosition: "50% 100%" },
+          "100%": { backgroundPosition: "50% 0%" },
+        },
       },
       backgroundSize: {
         "300%": "300%",
