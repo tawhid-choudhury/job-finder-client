@@ -4,6 +4,7 @@ import Logo from "./Logo";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import swal from "sweetalert";
+import { Tooltip } from "@material-tailwind/react";
 
 
 
@@ -68,11 +69,13 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="hidden md:flex gap-5 items-center">
-                        <div className={`avatar ${!user && "hidden"}`}>
-                            <div className="w-11 border-base-100 border-2 rounded-full">
-                                <img src={user?.photoURL} />
+                        <Tooltip content={user?.displayName} placement="bottom">
+                            <div className={`avatar ${!user && "hidden"}`}>
+                                <div className="w-11 border-base-100 border-2 rounded-full text-xs bg-black">
+                                    <img src={user?.photoURL} alt="broken" />
+                                </div>
                             </div>
-                        </div>
+                        </Tooltip>
                         <button onClick={handleLogout} className={`btn btn-warning btn-outline ${!user && "hidden"}`}>Log Out</button>
 
                         <button><NavLink to='/login' className={`btn btn-primary ${user && "hidden"}`}>Login</NavLink></button>
@@ -81,7 +84,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
