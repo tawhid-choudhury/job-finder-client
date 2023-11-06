@@ -2,7 +2,7 @@ import { Carousel } from "flowbite-react";
 
 const Banner = () => {
     return (
-        <div className="h-[50vh] lg:h-[75vh] -z-10 rounded-none">
+        <div className="relative h-[50vh] lg:h-[75vh] -z-10 rounded-none">
             <Carousel leftControl=" " rightControl=" " indicators={false} slideInterval={5000} className="rounded-none">
                 <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)' }}>
                 </div>

@@ -194,14 +194,14 @@ const SignUp = () => {
                                 Not a valid email address.
                             </Typography>
                         }
-                        <div className="flex flex-col items-center justify-center">
-                            <div className="w-full">
-                                <button onClick={handleGoogle} className="btn btn-primary btn-outline btn-block flex"><span className="text-2xl"><FcGoogle></FcGoogle></span><span className="flex-1">Sign Up with google</span></button>
-                            </div>
-                        </div>
-                        <div className="flex items-center justify-center">
-                            <p className="text-center text-sm">Already have an account? <Link to={"/login"}><span className=" text-primary underline hover:text-secondary">Login instead</span></Link></p></div>
                     </form>
+                    <div className="card-body pt-0">
+                        <button onClick={handleGoogle} className=" btn btn-primary btn-outline btn-block flex"><span className="text-2xl"><FcGoogle></FcGoogle></span><span className="flex-1">Sign Up with google</span></button>
+
+                        <div>
+                            <p className="text-center text-sm">Already have an account? <Link to={"/login"}><span className=" text-primary underline hover:text-secondary">Login instead</span></Link></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

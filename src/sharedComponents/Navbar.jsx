@@ -1,10 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { FaCircleUser } from "react-icons/fa6";
 import Logo from "./Logo";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+import swal from "sweetalert";
 
 
 
 const Navbar = () => {
+    const { user, logout } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logout()
+            .then(swal("Complete!", "logged out!", "success"))
+    }
     return (
         <div className="bg-base-300 absolute w-full bg-opacity-0 text-base-100 z-20 navbar-sty">
             <div className="navbar custom-main-spacing">
@@ -16,12 +25,12 @@ const Navbar = () => {
                         {/* Website logo, Website name, Home, All Jobs, Applied Jobs, Add A Job, My Jobs(Jobs that a user has created through Add A Job page), Blogs, and User Profile.  */}
 
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black bg-opacity-60 rounded-box w-52">
-                            <li><NavLink to="/" className="navItem">Home</NavLink></li>
-                            <li><NavLink to="/alljobs" className="navItem">All Jobs</NavLink></li>
-                            <li><NavLink to="/appliedjobs" className="navItem">Applied Jobs</NavLink></li>
-                            <li><NavLink to="/addajob" className="navItem">Add a Job</NavLink></li>
-                            <li><NavLink to="/myjobs" className="navItem">My Jobs</NavLink></li>
-                            <li><NavLink to="/blogs" className="navItem">Blogs</NavLink></li>
+                            <li className="navItem"><NavLink to="/">Home</NavLink></li>
+                            <li className="navItem"><NavLink to="/alljobs">All Jobs</NavLink></li>
+                            <li className={`navItem ${!user && "hidden"}`}><NavLink to="/appliedjobs">Applied Jobs</NavLink></li>
+                            <li className={`navItem ${!user && "hidden"}`}><NavLink to="/addajob">Add a Job</NavLink></li>
+                            <li className={`navItem ${!user && "hidden"}`}><NavLink to="/myjobs">My Jobs</NavLink></li>
+                            <li className="navItem"><NavLink to="/blogs" >Blogs</NavLink></li>
                             {/* <li><NavLink to="/profile" className="navItem">Home</NavLink></li> */}
                         </ul>
                     </div>
@@ -31,12 +40,12 @@ const Navbar = () => {
 
                     <div className="hidden lg:flex">
                         <ul className=" menu-horizontal gap-6 px-5">
-                            <li><NavLink to="/" className="navItem">Home</NavLink></li>
-                            <li><NavLink to="/alljobs" className="navItem">All Jobs</NavLink></li>
-                            <li><NavLink to="/appliedjobs" className="navItem">Applied Jobs</NavLink></li>
-                            <li><NavLink to="/addajob" className="navItem">Add a Job</NavLink></li>
-                            <li><NavLink to="/myjobs" className="navItem">My Jobs</NavLink></li>
-                            <li><NavLink to="/blogs" className="navItem">Blogs</NavLink></li>
+                            <li className="navItem"><NavLink to="/">Home</NavLink></li>
+                            <li className="navItem"><NavLink to="/alljobs">All Jobs</NavLink></li>
+                            <li className={`navItem ${!user && "hidden"}`}><NavLink to="/appliedjobs">Applied Jobs</NavLink></li>
+                            <li className={`navItem ${!user && "hidden"}`}><NavLink to="/addajob">Add a Job</NavLink></li>
+                            <li className={`navItem ${!user && "hidden"}`}><NavLink to="/myjobs">My Jobs</NavLink></li>
+                            <li className="navItem"><NavLink to="/blogs" >Blogs</NavLink></li>
                             {/* <li><NavLink to="/profile" className="hover:text-primary">Item 1</NavLink></li> */}
                         </ul>
                     </div>
@@ -44,17 +53,31 @@ const Navbar = () => {
                 <div className="navbar-end">
                     <div className="md:hidden">
                         <div className="dropdown dropdown-bottom dropdown-end">
-                            <label tabIndex={0} className="text-[27px]"><FaCircleUser></FaCircleUser></label>
+                            <label tabIndex={0} className="text-[40px]">{user ? <div className={`avatar ${!user && "hidden"}`}>
+                                <div className="w-[40px] border-base-100 border-2 rounded-full">
+                                    <img src={user?.photoURL} />
+                                </div>
+                            </div>
+                                : <FaCircleUser></FaCircleUser>}</label>
                             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-black bg-opacity-60 rounded-box w-52">
-                                <li><NavLink to='/login'>Login</NavLink></li>
-                                <li><NavLink to='/signup'>Register</NavLink></li>
+                                <li className={`${user && "hidden"}`}><NavLink to='/login'>Login</NavLink></li>
+                                <li className={`${user && "hidden"}`}><NavLink to='/signup'>Sign Up</NavLink></li>
+                                <li className={`${!user && "hidden"}`} ><button onClick={handleLogout}>Logout</button></li>
+                                <li className={`${!user && "hidden"}`}><NavLink to='/profile'>Profile</NavLink></li>
                             </ul>
                         </div>
                     </div>
-                    <div className="hidden md:flex items-center">
-                        <button><NavLink to='/login' className="btn btn-primary">Login</NavLink></button>
-                        <h3 className="mx-3">or</h3>
-                        <button><NavLink to='/signup' className="hover:text-primary">Sign Up</NavLink></button>
+                    <div className="hidden md:flex gap-5 items-center">
+                        <div className={`avatar ${!user && "hidden"}`}>
+                            <div className="w-11 border-base-100 border-2 rounded-full">
+                                <img src={user?.photoURL} />
+                            </div>
+                        </div>
+                        <button onClick={handleLogout} className={`btn btn-warning btn-outline ${!user && "hidden"}`}>Log Out</button>
+
+                        <button><NavLink to='/login' className={`btn btn-primary ${user && "hidden"}`}>Login</NavLink></button>
+                        <h3 className={`${user && "hidden"}`}>or</h3>
+                        <button><NavLink to='/signup' className={`hover:text-primary ${user && "hidden"}`}>Sign Up</NavLink></button>
                     </div>
                 </div>
             </div>
