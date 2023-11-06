@@ -13,11 +13,14 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import swal from "sweetalert";
 import useAuthFunctions from "../../hooks/useAuthFunctions";
+import useShowPassword from "../../hooks/useShowPassword";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const SignUp = () => {
     const [name, handleNameChange] = useName();
     const [email, emailOk, handleEmailChange] = useEmailSignUp();
     const [password, passwordOk, passfocused, setpassFocused, handlePasswordChange] = usePasswordSignUp();
+    const [showPassword, toggleShowPassword] = useShowPassword();
     const [photoUrl, photoUrlOk, avater, imageloaded, setImageloaded, handlePhotoUrlChange] = usePhotoUrl();
     const [errorText, setErrorText] = useState("")
     const [handleGoogle] = useAuthFunctions(setErrorText);
@@ -127,7 +130,7 @@ const SignUp = () => {
                             <div className="relative z-0 w-full  group">
                                 <input
                                     onChange={handlePasswordChange}
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     name="password"
                                     id="floating_password"
                                     className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-[1px] border-blue-gray-200 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 ${passwordOk ? "focus:border-black" : "focus:border-red-500"} focus:border-b-2 peer`}
@@ -141,6 +144,9 @@ const SignUp = () => {
                                     className={`peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 ${passwordOk ? "peer-focus:text-black" : "peer-focus:text-red-500"} peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}>
                                     Password<span className="text-red-500 ml-[1px]">*</span>
                                 </label>
+                                <div className="absolute top-0 right-0 bg-opacity-0 btn btn-ghost btn-circle text-2xl" onClick={toggleShowPassword}>
+                                    {!showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                                </div>
                             </div>
 
                             {passfocused ?

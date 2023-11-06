@@ -9,6 +9,8 @@ import useEmailSignUp from "../../hooks/useEmailSignUp";
 import useAuthFunctions from "../../hooks/useAuthFunctions";
 import { AuthContext } from "../../providers/AuthProvider";
 import swal from "sweetalert";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import useShowPassword from "../../hooks/useShowPassword";
 
 const Login = () => {
 
@@ -17,6 +19,7 @@ const Login = () => {
     const [errorText, setErrorText] = useState("")
     const [handleGoogle] = useAuthFunctions(setErrorText);
     const { loginEmailPass } = useContext(AuthContext)
+    const [showPassword, toggleShowPassword] = useShowPassword();
     const nav = useNavigate();
 
 
@@ -93,10 +96,10 @@ const Login = () => {
                             <div className="relative z-0 w-full  group">
                                 <input
                                     onChange={handlePasswordChange}
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     name="password"
                                     id="floating_password"
-                                    className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-[1px] border-blue-gray-200 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-b-2 peer`}
+                                    className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-[1px] border-blue-gray-200 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-black   focus:border-b-2 peer`}
                                     placeholder=" "
                                     required />
 
@@ -105,18 +108,19 @@ const Login = () => {
                                     className={`peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}>
                                     Password<span className="text-red-500 ml-[1px]">*</span>
                                 </label>
+                                <div className="absolute top-0 right-0 bg-opacity-0 btn btn-ghost rounded-full text-2xl" onClick={toggleShowPassword}>
+                                    {!showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                                </div>
                             </div>
                         </div>
                         <div className="form-control">
                             <input type="submit" value={"Login"} className="btn btn-primary" />
                         </div>
-                    </form>
-                    <div className="card-body pt-0">
                         {!errorText ? "" :
                             <Typography
                                 variant="small"
                                 color="gray"
-                                className="mt-2 flex items-center gap-1 font-normal text-xs text-red-500"
+                                className=" flex items-center gap-1 font-normal text-xs text-red-500"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="-mt-px h-4 w-4"
                                 >
@@ -126,6 +130,9 @@ const Login = () => {
                                 {errorText}
                             </Typography>
                         }
+                    </form>
+                    <div className="card-body pt-0">
+
                         <div className="flex flex-col items-center justify-center">
                             <div className="w-full">
                                 <button onClick={handleGoogle} className="btn btn-primary btn-outline btn-block flex"><span className="text-2xl"><FcGoogle></FcGoogle></span><span className="flex-1">Login with google</span></button>
