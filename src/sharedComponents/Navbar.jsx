@@ -46,8 +46,8 @@ const Navbar = () => {
                         <div className="dropdown dropdown-bottom dropdown-end">
                             <label tabIndex={0} className="text-[27px]"><FaCircleUser></FaCircleUser></label>
                             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-black bg-opacity-60 rounded-box w-52">
-                                <li><NavLink>Login</NavLink></li>
-                                <li><NavLink>Register</NavLink></li>
+                                <li><NavLink to='/login'>Login</NavLink></li>
+                                <li><NavLink to='/signup'>Register</NavLink></li>
                             </ul>
                         </div>
                     </div>

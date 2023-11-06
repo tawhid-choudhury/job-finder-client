@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../sharedComponents/Logo";
 // import StaticBanner from "../../sharedComponents/StaticBanner";
 import { FcGoogle } from "react-icons/fc";
@@ -9,17 +9,49 @@ import useName from "../../hooks/useName";
 import useEmailSignUp from "../../hooks/useEmailSignUp";
 import usePasswordSignUp from "../../hooks/usePasswordSignUp";
 import usePhotoUrl from "../../hooks/usePhotoUrl";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import swal from "sweetalert";
+import useAuthFunctions from "../../hooks/useAuthFunctions";
 
 const SignUp = () => {
     const [name, handleNameChange] = useName();
     const [email, emailOk, handleEmailChange] = useEmailSignUp();
     const [password, passwordOk, passfocused, setpassFocused, handlePasswordChange] = usePasswordSignUp();
     const [photoUrl, photoUrlOk, avater, imageloaded, setImageloaded, handlePhotoUrlChange] = usePhotoUrl();
+    const [errorText, setErrorText] = useState("")
+    const [handleGoogle] = useAuthFunctions(setErrorText);
+
+    const { signUpEmailPass, updateNamePhoto, setLoading } = useContext(AuthContext)
+    const nav = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(name, email, password, photoUrl);
+        signUpEmailPass(email, password)
+            .then((uc) => {
+                console.log(uc);
+                updateNamePhoto(uc.user, name, photoUrl).then(() => {
+                    console.log("display name set as :" + name);
+                    setLoading(false)
+                }).catch(err => {
+                    console.log(err);
+                });
+                swal("Complete!", "Account Created!", "success");
+                nav("/")
+            }).catch((err) => {
+                if (err.code === "auth/email-already-in-use") {
+                    swal("Error!", "Email is already in use. Please choose a different email.", "error");
+                    setErrorText("Email is already in use");
+                } else {
+                    swal("Error:", err);
+                    setErrorText("Error:", err);
+                }
+            })
+
+
     };
+
     return (
         <div>
             <Helmet>
@@ -144,14 +176,27 @@ const SignUp = () => {
                                 </Typography>
                             }
 
-
                         </div>
                         <div className="form-control mt-6">
                             <input type="submit" value={"Sign Up"} className="btn btn-primary" />
                         </div>
+                        {!errorText ? "" :
+                            <Typography
+                                variant="small"
+                                color="gray"
+                                className="mt-2 flex items-center gap-1 font-normal text-xs text-red-500"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="-mt-px h-4 w-4"
+                                >
+                                    <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd"
+                                    />
+                                </svg>
+                                Not a valid email address.
+                            </Typography>
+                        }
                         <div className="flex flex-col items-center justify-center">
                             <div className="w-full">
-                                <button className="btn btn-primary btn-outline btn-block flex"><span className="text-2xl"><FcGoogle></FcGoogle></span><span className="flex-1">Sign Up with google</span></button>
+                                <button onClick={handleGoogle} className="btn btn-primary btn-outline btn-block flex"><span className="text-2xl"><FcGoogle></FcGoogle></span><span className="flex-1">Sign Up with google</span></button>
                             </div>
                         </div>
                         <div className="flex items-center justify-center">
