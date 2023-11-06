@@ -4,59 +4,67 @@ import Logo from "../../sharedComponents/Logo";
 import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet-async";
 import { Input, Typography } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import useName from "../../hooks/useName";
+import useEmailSignUp from "../../hooks/useEmailSignUp";
+import usePasswordSignUp from "../../hooks/usePasswordSignUp";
+import usePhotoUrl from "../../hooks/usePhotoUrl";
 
 const SignUp = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [emailOk, setEmailOk] = useState(true);
-    const [password, setPassword] = useState("");
-    const [passwordOk, setPasswordOk] = useState(true);
-    const [passfocused, setpassFocused] = useState(false)
-    const [photoUrl, setPhotoUrl] = useState("");
-    const [photoUrlOk, setPhotoUrlOk] = useState(true);
-    const [avater, setAvater] = useState(false);
-    const [imageloaded, setImageloaded] = useState(false);
+    // const [name, setName] = useState("");
+    const [name, handleNameChange] = useName();
+    const [email, emailOk, handleEmailChange] = useEmailSignUp();
+    const [password, passwordOk, passfocused, setpassFocused, handlePasswordChange] = usePasswordSignUp();
+    const [photoUrl, photoUrlOk, avater, imageloaded, setImageloaded, handlePhotoUrlChange] = usePhotoUrl();
+    // const [email, setEmail] = useState("");
+    // const [emailOk, setEmailOk] = useState(true);
+    // const [password, setPassword] = useState("");
+    // const [passwordOk, setPasswordOk] = useState(true);
+    // const [passfocused, setpassFocused] = useState(false);
+    // const [photoUrl, setPhotoUrl] = useState("");
+    // const [photoUrlOk, setPhotoUrlOk] = useState(true);
+    // const [avater, setAvater] = useState(false);
+    // const [imageloaded, setImageloaded] = useState(false);
     // const [credentialsOk, setCredentialsOk] = useState(true);
 
-    useEffect(() => {
-        if (photoUrl && photoUrlOk) {
-            setAvater(true)
-        }
-    }, [photoUrl, photoUrlOk])
+    // useEffect(() => {
+    //     if (photoUrl && photoUrlOk) {
+    //         setAvater(true)
+    //     }
+    // }, [photoUrl, photoUrlOk])
 
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-    };
+    // const handleNameChange = (e) => {
+    //     setName(e.target.value);
+    // };
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        console.log(email, emailRegex.test(email));
-        setEmailOk(emailRegex.test(e.target.value));
-        if (!e.target.value) {
-            setEmailOk(true);
-        }
-    };
+    // const handleEmailChange = (e) => {
+    //     setEmail(e.target.value);
+    //     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    //     console.log(email, emailRegex.test(email));
+    //     setEmailOk(emailRegex.test(e.target.value));
+    //     if (!e.target.value) {
+    //         setEmailOk(true);
+    //     }
+    // };
 
-    const handlePhotoUrlChange = (e) => {
-        setPhotoUrl(e.target.value);
-        const imageExtensions = /\.(jpg|jpeg|png|gif|bmp|svg|webp|tiff)$/i;
-        setPhotoUrlOk(imageExtensions.test(e.target.value));
-        if (!e.target.value) {
-            setPhotoUrlOk(true);
-        }
-    };
+    // const handlePhotoUrlChange = (e) => {
+    //     setPhotoUrl(e.target.value);
+    //     const imageExtensions = /\.(jpg|jpeg|png|gif|bmp|svg|webp|tiff)$/i;
+    //     setPhotoUrlOk(imageExtensions.test(e.target.value));
+    //     if (!e.target.value) {
+    //         setPhotoUrlOk(true);
+    //     }
+    // };
 
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
-        setPasswordOk(passwordRegex.test(e.target.value));
-    };
+    // const handlePasswordChange = (e) => {
+    //     setPassword(e.target.value);
+    //     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+    //     setPasswordOk(passwordRegex.test(e.target.value));
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(email, password, name, photoUrl);
+        console.log(name, email, password, photoUrl);
     };
     return (
         <div>
@@ -65,7 +73,7 @@ const SignUp = () => {
             </Helmet>
             {/* <StaticBanner></StaticBanner> */}
             <div className="flex flex-col gap-5 items-center justify-center min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-500 via-success to-primary animate-gradient top-0 px-2">
-                <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mt-10 ">
+                <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mt-10 rounded-md">
                     <form className="card-body space-y-4" onSubmit={handleSubmit}>
                         <div className="pt-3 hidden lg:block">
                             <Logo></Logo>
