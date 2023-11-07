@@ -6,6 +6,8 @@ import Logo from "../../sharedComponents/Logo";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Datepicker } from "flowbite-react";
 import swal from "sweetalert";
+import axiosJobFinder from "../../api/axiosJobFinder";
+// import axios from "axios";
 
 
 
@@ -42,6 +44,8 @@ const AddAJob = () => {
         console.log('deadline:', deadline);
         console.log('shortDes:', shortDes);
 
+        const newJob = { bannerImgUrl, employerName, jobTitle, category, salarymin, salarymax, postDate, deadline, shortDes }
+
         if (!bannerImgUrl) {
             swal("Warning", "Please enter a banner image URL", "warning");
             return;
@@ -62,8 +66,8 @@ const AddAJob = () => {
             swal("shortDes", "Please enter a short description", "warning");
             return;
         }
-
-
+        axiosJobFinder.post("/addajob", newJob)
+            .then(data => console.log(data.data))
 
     }
 
