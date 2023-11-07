@@ -7,6 +7,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Datepicker } from "flowbite-react";
 import swal from "sweetalert";
 import axiosJobFinder from "../../api/axiosJobFinder";
+import { Helmet } from "react-helmet-async";
 // import axios from "axios";
 
 
@@ -20,6 +21,7 @@ const AddAJob = () => {
     const [deadline, setDeadline] = useState(new Date());
 
     const handleDatePickerChange = (date) => {
+        date.setHours(23, 59, 59, 999);
         setDeadline(date);
         console.log(typeof (date));
     };
@@ -32,6 +34,8 @@ const AddAJob = () => {
         const jobTitle = form.jobTitle.value;
         const category = form.category.value;
         const shortDes = form.shortDes.value;
+        const employerEmail = user.email;
+        const totalApplicant = 0;
 
 
         console.log('bannerImgUrl:', bannerImgUrl);
@@ -44,7 +48,7 @@ const AddAJob = () => {
         console.log('deadline:', deadline);
         console.log('shortDes:', shortDes);
 
-        const newJob = { bannerImgUrl, employerName, jobTitle, category, salarymin, salarymax, postDate, deadline, shortDes }
+        const newJob = { bannerImgUrl, employerName, employerEmail, totalApplicant, jobTitle, category, salarymin, salarymax, postDate, deadline, shortDes }
 
         if (!bannerImgUrl) {
             swal("Warning", "Please enter a banner image URL", "warning");
@@ -67,12 +71,23 @@ const AddAJob = () => {
             return;
         }
         axiosJobFinder.post("/addajob", newJob)
-            .then(data => console.log(data.data))
+            .then(data => {
+                console.log(data.data)
+                if (data.data.insertedId) {
+                    swal("Complete!", "added a new job!", "success");
+                }
+            }).catch(err => {
+                console.log(err);
+                swal("Error!", `${err.message}`, "error");
+            })
 
     }
 
     return (
         <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-warning via-secondary to-warning animate-gradient top-0 py-36 px-5">
+            <Helmet>
+                <title>Job Finder | Add a job</title>
+            </Helmet>
             <div className="bg-white flex flex-col justify-center items-center max-w-[1600px] m-auto py-10 lg:py-20 rounded-md px-3">
                 {/* */}
                 <form className="w-full max-w-7xl" onSubmit={handleAdd}>
@@ -169,9 +184,11 @@ const AddAJob = () => {
                         {/* <input type="text" placeholder="Short Description" name="shortDes" className="input input-bordered w-full" /> */}
                         <textarea type="text" placeholder="Short Description" name="shortDes" className="textarea textarea-bordered rounded w-full"></textarea>
                     </div>
-                    <input type="submit" value="Add" className="btn btn-block btn-primary my-7 " />
+                    <p className="font-bold mt-7">total applicants: 0</p>
+                    <input type="submit" value="Add" className="btn btn-block btn-primary mb-7 " />
 
                 </form>
+
 
 
             </div >

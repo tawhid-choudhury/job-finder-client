@@ -4,6 +4,7 @@ import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login';
 import SignUp from '../Pages/SignUp/SignUp';
 import AddAJob from '../Pages/AddAJob/AddAJob';
+import AllJobs from '../Pages/AllJobs/AllJobs';
 
 // "/alljobs
 // "/appliedjobs
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/alljobs",
-                element: <h1>alljobs</h1>
+                element: <AllJobs></AllJobs>
             },
             {
                 path: "/appliedjobs",

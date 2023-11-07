@@ -72,7 +72,7 @@ const SignUp = () => {
             {/* <StaticBanner></StaticBanner> */}
             <div className=" flex flex-col gap-5 items-center justify-center min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-500 via-success to-primary animate-gradient top-0 px-2">
                 <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 my-20 rounded-md">
-                    <form className="card-body space-y-4" onSubmit={handleSubmit}>
+                    <form className="card-body space-y-4 pb-0" onSubmit={handleSubmit}>
                         <div className="pt-3 hidden lg:block">
                             <Logo></Logo>
                         </div>
@@ -210,6 +210,7 @@ const SignUp = () => {
                             </Typography>
                         }
                     </form>
+                    <div className="divider">or</div>
                     <div className="card-body pt-0">
                         <button onClick={handleGoogle} className=" btn btn-primary btn-outline btn-block flex"><span className="text-2xl"><FcGoogle></FcGoogle></span><span className="flex-1">Sign Up with google</span></button>
 
