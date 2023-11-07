@@ -30,6 +30,7 @@ const AddAJob = () => {
         e.preventDefault();
         const form = e.target;
         const bannerImgUrl = form.bannerImgUrl.value;
+        const logoUrl = form.logoUrl.value;
         const employerName = form.employerName.value;
         const jobTitle = form.jobTitle.value;
         const category = form.category.value;
@@ -39,6 +40,7 @@ const AddAJob = () => {
 
 
         console.log('bannerImgUrl:', bannerImgUrl);
+        console.log('logoUrl:', logoUrl);
         console.log('employerName:', employerName);
         console.log('jobTitle:', jobTitle);
         console.log('category:', category);
@@ -48,7 +50,7 @@ const AddAJob = () => {
         console.log('deadline:', deadline);
         console.log('shortDes:', shortDes);
 
-        const newJob = { bannerImgUrl, employerName, employerEmail, totalApplicant, jobTitle, category, salarymin, salarymax, postDate, deadline, shortDes }
+        const newJob = { bannerImgUrl, logoUrl, employerName, employerEmail, totalApplicant, jobTitle, category, salarymin, salarymax, postDate, deadline, shortDes }
 
         if (!bannerImgUrl) {
             swal("Warning", "Please enter a banner image URL", "warning");
@@ -103,6 +105,13 @@ const AddAJob = () => {
                         </label>
                         {/* onChange={handleImage} */}
                         <input type="text" name="bannerImgUrl" placeholder="Banner imageURL" className="input input-bordered w-full" />
+                    </div>
+                    <div className="w-full">
+                        <label className="label">
+                            <span className="label-text">Logo image URL</span>
+                        </label>
+                        {/* onChange={handleImage} */}
+                        <input type="text" name="logoUrl" placeholder="Logo imageURL(OPTIONAL)" className="input input-bordered w-full" />
                     </div>
                     <div>
                         <div className="grid md:grid-cols-2 gap-7">

@@ -21,7 +21,7 @@
   @apply underline bg-none;
 }
 .text-heading-custom {
-  @apply text-4xl;
+  @apply text-lg md:text-2xl lg:text-4xl;
 }
 
 .animate-gradient {

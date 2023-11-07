@@ -7,7 +7,7 @@ const StaticBanner = ({ imgUrl, heading, height }) => {
     };
 
     return (
-        <div className='absolute w-full -z-50'>
+        <div className='w-full -z-50 w-full h-full bg-gradient-to-r from-blue-500 via-success to-primary animate-gradient'>
             <div className="hero" style={bannerStyles}>
                 <div className={imgUrl ? 'hero-overlay bg-opacity-60' : 'bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-500 via-success to-primary animate-gradient'}></div>
                 <div className="hero-content text-center text-neutral-content">

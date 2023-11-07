@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const JobInTable = ({ job }) => {
-    const { employerName, jobTitle, salarymin, salarymax, postDate, deadline } = job;
+    const { _id, employerName, jobTitle, salarymin, salarymax, postDate, deadline } = job;
     const postDateObj = new Date(postDate);
     const deadlineObj = new Date(deadline);
     const postDay = postDateObj.getDate();
@@ -27,7 +28,7 @@ const JobInTable = ({ job }) => {
             <td>{postDateString}</td>
             <td>{deadlineDateString}</td>
             <td>{salarymin}$-{salarymax}$</td>
-            <td><button className='btn btn-primary'>Details</button></td>
+            <td><Link to={`/job/${_id}`}><button onClick={() => console.log(_id)} className='btn btn-primary'>Details</button></Link></td>
         </tr>
     );
 };
