@@ -10,6 +10,10 @@
   @apply rounded-[3px] h-full min-h-[35px] font-normal;
 }
 
+.input {
+  @apply rounded-[3px] h-full min-h-[35px];
+}
+
 .navItem {
   @apply hover:text-primary;
 }
@@ -29,6 +33,12 @@
 
 .animate-gradient-banner-home {
   background-size: 125%;
+  -webkit-animation: animatedgradient 30s ease infinite alternate;
+  -moz-animation: animatedgradient 30s ease infinite alternate;
+  animation: animatedgradient 30s ease infinite alternate;
+}
+.animate-gradient-banner-home2 {
+  /* background-size: 100%; */
   -webkit-animation: animatedgradient 30s ease infinite alternate;
   -moz-animation: animatedgradient 30s ease infinite alternate;
   animation: animatedgradient 30s ease infinite alternate;
