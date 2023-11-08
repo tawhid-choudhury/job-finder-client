@@ -7,6 +7,7 @@ import AddAJob from '../Pages/AddAJob/AddAJob';
 import AllJobs from '../Pages/AllJobs/AllJobs';
 import Jobdetails from '../Pages/JobDetails/Jobdetails';
 import MyJobs from '../Pages/MyJobs/MyJobs';
+import PrivateRoute from './PrivateRoute';
 
 // "/alljobs
 // "/appliedjobs
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/myjobs",
-                element: <MyJobs></MyJobs>
+                element: <PrivateRoute><MyJobs></MyJobs></PrivateRoute>
             },
             {
                 path: "/blogs",
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: "/job/:id",
                 element: <Jobdetails></Jobdetails>
+            },
+            {
+                path: "/update/:id",
+                element: <></>
             },
 
         ]

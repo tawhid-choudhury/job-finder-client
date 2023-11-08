@@ -11,7 +11,7 @@ const MyJobs = () => {
     const { user } = useContext(AuthContext)
     const { isPending, error, data, refetch } = useEmailFilterForMyJobs(user.email);
 
-    if (isPending) return <progress className="progress w-56"></progress>
+    if (isPending) return <div className='flex justify-center items-center min-h-screen bg-gray-600'><span className="loading loading-spinner loading-lg "></span></div>
 
     if (error) return 'An error has occurred: ' + error.message
 
