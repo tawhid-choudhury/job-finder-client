@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import MyJob from "./MyJob";
 import axiosJobFinder from "../../api/axiosJobFinder";
 import swal from "sweetalert";
+import { Helmet } from "react-helmet-async";
 
 
 const MyJobs = () => {
@@ -32,6 +33,9 @@ const MyJobs = () => {
     console.log(data);
     return (
         <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-l from-blue-900 via-red-500 to-blue-900 animate-gradient top-0 py-36 px-5">
+            <Helmet>
+                <title>Job Finder | My Jobs</title>
+            </Helmet>
             <div>
                 <Card className="max-w-[400px] m-auto bg-white pt-5 rounded rounded-b-none">
                     <div className="pt-3 hidden lg:block">

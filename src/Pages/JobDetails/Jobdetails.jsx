@@ -4,6 +4,7 @@ import useJobById from "../../hooks/useJobById";
 import { Card } from "@material-tailwind/react";
 
 import { GiMoneyStack } from "react-icons/gi";
+import { Helmet } from "react-helmet-async";
 const Jobdetails = () => {
     const { id } = useParams();
     console.log(id);
@@ -29,6 +30,9 @@ const Jobdetails = () => {
 
     return (
         <div className="relative">
+            <Helmet>
+                <title>Job Finder | {jobTitle}</title>
+            </Helmet>
             <StaticBanner imgUrl={bannerImgUrl} heading={jobTitle} height="400px"></StaticBanner>
             <div className="min-w-full w-full h-full  top-0  px-5">
                 <div>

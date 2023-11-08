@@ -24,7 +24,7 @@ const MyJob = ({ job, handledelete }) => {
             <td>{postDateString}</td>
             <td>{deadlineDateString}</td>
             <td>{salarymin}$-{salarymax}$</td>
-            <td><Link to={`/updateJob/${_id}`}><button onClick={() => console.log(_id)} className='btn btn-success'>Update</button></Link></td>
+            <td><Link to={`/updatejob/${_id}`}><button onClick={() => console.log(_id)} className='btn btn-success'>Update</button></Link></td>
             <td><Link><button onClick={() => handledelete(_id)} className='btn btn-error'>Delete</button></Link></td>
         </tr>
 

@@ -2,6 +2,7 @@ import { Card } from "@material-tailwind/react";
 import useAllJobs from "../../hooks/useAllJobs";
 import JobInTable from "./JobInTable";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 // import StaticBanner from "../../sharedComponents/StaticBanner";
 
 const AllJobs = () => {
@@ -22,6 +23,9 @@ const AllJobs = () => {
 
     return (
         <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-success via-warning to-success animate-gradient top-0 py-36 px-5">
+            <Helmet>
+                <title>Job Finder | All Jobs</title>
+            </Helmet>
             <div>
                 <Card className="max-w-[400px] m-auto bg-white pt-5 rounded rounded-b-none">
                     <div className="pt-3 hidden lg:block">
