@@ -4,6 +4,8 @@ import Tabs from "./Tabs";
 import useAllJobs from "../../hooks/useAllJobs";
 import { useEffect, useState } from "react";
 import { Card } from "@material-tailwind/react";
+import Team from "./Team";
+import Contact from "./Contact";
 // import { Tab } from "@material-tailwind/react";
 
 const Home = () => {
@@ -46,6 +48,8 @@ const Home = () => {
                 </div>
             </div>
             <Tabs data={data} filteredJobs={filteredJobs} setFilteredJobs={setFilteredJobs}></Tabs>
+            <Team></Team>
+            <Contact></Contact>
         </div>
     );
 };

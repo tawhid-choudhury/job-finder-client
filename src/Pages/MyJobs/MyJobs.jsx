@@ -1,6 +1,6 @@
 import { Card } from "@material-tailwind/react";
-import useEmailFilterForMyJobs from "../../hooks/useEmailFilterForMyJobs";
-import { useContext } from "react";
+// import useEmailFilterForMyJobs from "../../hooks/useEmailFilterForMyJobs";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import MyJob from "./MyJob";
 import axiosJobFinder from "../../api/axiosJobFinder";
@@ -10,25 +10,32 @@ import { Helmet } from "react-helmet-async";
 
 const MyJobs = () => {
     const { user } = useContext(AuthContext)
-    const { isPending, error, data, refetch } = useEmailFilterForMyJobs(user.email);
+    const [data, setData] = useState([]);
+    // const { isPending, error, data, refetch } = useEmailFilterForMyJobs(user.email);
 
-    if (isPending) return <div className='flex justify-center items-center min-h-screen bg-gray-600'><span className="loading loading-spinner loading-lg "></span></div>
+    // if (isPending) return <div className='flex justify-center items-center min-h-screen bg-gray-600'><span className="loading loading-spinner loading-lg "></span></div>
 
-    if (error) return (
-        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-yellow-500 via-warning to-yellow-400 animate-gradient flex items-center justify-around px-5">
-            <Card className="max-w-[600px] m-auto bg-white pt-5 rounded grid lg:grid-cols-2 items-center justify-around p-9">
-                <p className="text-xl  font-bold text-center">An error has occurred: <br />{error.message}</p>
-                <img src="https://i.ibb.co/sVwMWV2/stitch-sad-sad-stitch.gif" alt="" />
-            </Card>
-        </div>
-    )
+    // if (error) return (
+    //     <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-yellow-500 via-warning to-yellow-400 animate-gradient flex items-center justify-around px-5">
+    //         <Card className="max-w-[600px] m-auto bg-white pt-5 rounded grid lg:grid-cols-2 items-center justify-around p-9">
+    //             <p className="text-xl  font-bold text-center">An error has occurred: <br />{error.message}</p>
+    //             <img src="https://i.ibb.co/sVwMWV2/stitch-sad-sad-stitch.gif" alt="" />
+    //         </Card>
+    //     </div>
+    // )
+    useEffect(() => {
+        axiosJobFinder.get(`/alljobspersonal?employerEmail=${user.email}`, { withCredentials: true })
+            .then(res => {
+                setData(res.data)
+            })
+    }, [user.email])
 
     const handledelete = (id) => {
         axiosJobFinder.delete(`/alljobs/${id}`)
             .then(res => {
                 console.log(res.data);
                 if (res.data.deletedCount === 1) {
-                    refetch();
+                    // refetch();
                     swal("Deleted", "", "success");
                 }
             }).catch(err => {

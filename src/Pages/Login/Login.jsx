@@ -11,6 +11,8 @@ import { AuthContext } from "../../providers/AuthProvider";
 import swal from "sweetalert";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import useShowPassword from "../../hooks/useShowPassword";
+// import axios from "axios";
+import axiosJobFinder from "../../api/axiosJobFinder";
 
 const Login = () => {
 
@@ -37,9 +39,16 @@ const Login = () => {
         console.log(email, password);
         loginEmailPass(email, password)
             .then((uc) => {
-                console.log(location);
-                swal("Complete!", "Logged in!", "success");
-                nav(location?.state ? location.state : "/")
+                console.log(location, uc);
+                const ue = { email };
+                axiosJobFinder.post("/jwt", ue, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.success) {
+                            swal("Complete!", "Logged in!", "success");
+                            nav(location?.state ? location.state : "/")
+                        }
+                    })
             }).catch((err) => {
                 if (err.code === "auth/invalid-login-credentials") {
                     swal("Error!", "Invalid login credentials", "error");

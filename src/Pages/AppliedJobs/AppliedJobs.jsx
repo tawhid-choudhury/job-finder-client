@@ -1,17 +1,25 @@
 import { Card } from "@material-tailwind/react";
 import { Helmet } from "react-helmet-async";
-import useAppliedJobsById from "../../hooks/useAppliedJobsById";
+// import useAppliedJobsById from "../../hooks/useAppliedJobsById";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import AppliedJobTableItem from "./AppliedJobTableItem";
+import axiosJobFinder from "../../api/axiosJobFinder";
 
 
 const AppliedJobs = () => {
     const { user } = useContext(AuthContext)
-    const { isPending, error, data } = useAppliedJobsById(user.email);
+    // const { isPending, error, data } = useAppliedJobsById(user.email);
+    const [data, setData] = useState([]);
 
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredJobs, setFilteredJobs] = useState(data);
+    useEffect(() => {
+        axiosJobFinder.get(`/allapplied?applicantEmail=${user.email}`, { withCredentials: true })
+            .then(res => {
+                setData(res.data)
+            })
+    }, [user.email])
 
     useEffect(() => {
         const updatedFilteredJobs = data?.filter((applied) =>
@@ -24,16 +32,16 @@ const AppliedJobs = () => {
 
 
 
-    if (isPending) return <div className='flex justify-center items-center min-h-screen bg-gray-600'><span className="loading loading-spinner loading-lg "></span></div>
+    // if (isPending) return <div className='flex justify-center items-center min-h-screen bg-gray-600'><span className="loading loading-spinner loading-lg "></span></div>
 
-    if (error) return (
-        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-yellow-500 via-warning to-yellow-400 animate-gradient flex items-center justify-around px-5">
-            <Card className="max-w-[600px] m-auto bg-white pt-5 rounded grid lg:grid-cols-2 items-center justify-around p-9">
-                <p className="text-xl  font-bold text-center">An error has occurred: <br />{error.message}</p>
-                <img src="https://i.ibb.co/sVwMWV2/stitch-sad-sad-stitch.gif" alt="" />
-            </Card>
-        </div>
-    )
+    // if (error) return (
+    //     <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-yellow-500 via-warning to-yellow-400 animate-gradient flex items-center justify-around px-5">
+    //         <Card className="max-w-[600px] m-auto bg-white pt-5 rounded grid lg:grid-cols-2 items-center justify-around p-9">
+    //             <p className="text-xl  font-bold text-center">An error has occurred: <br />{error.message}</p>
+    //             <img src="https://i.ibb.co/sVwMWV2/stitch-sad-sad-stitch.gif" alt="" />
+    //         </Card>
+    //     </div>
+    // )
 
     // console.log(data);
     data.map(ap => console.log(ap.jobId))

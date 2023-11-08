@@ -10,7 +10,7 @@ const Profile = () => {
     return (
         <div>
             <Helmet>
-                <title>Job Finder | Sign Up</title>
+                <title>Job Finder | Profile</title>
             </Helmet>
             {/* <StaticBanner></StaticBanner> */}
             <div className=" flex flex-col gap-5 items-center justify-center min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-500 via-success to-primary animate-gradient top-0 px-2">

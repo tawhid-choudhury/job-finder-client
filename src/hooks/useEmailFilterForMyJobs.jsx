@@ -6,7 +6,7 @@ const useEmailFilterForMyJobs = (employerEmail) => {
         {
             queryKey: ["tawhid_assignment10_allJobs"],
             queryFn: async () => {
-                const fetchedData = await fetch(`http://localhost:5000/alljobs?employerEmail=${employerEmail}`);
+                const fetchedData = await fetch(`http://localhost:5000/alljobs?employerEmail=${employerEmail}`, { withCredentials: true });
                 return await fetchedData.json();
             }
         }
