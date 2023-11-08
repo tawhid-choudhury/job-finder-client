@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Logo from "../../sharedComponents/Logo";
+import axiosJobFinder from "../../api/axiosJobFinder";
 
 const UpdateJob = () => {
 
@@ -49,7 +50,7 @@ const UpdateJob = () => {
         const jobTitle = form.jobTitle.value;
         const category = form.category.value;
         const shortDes = form.shortDes.value;
-        const employerEmail = user.email;
+        // const employerEmail = user.email;
         // const totalApplicant = { data.totalApplicant };
 
 
@@ -66,7 +67,7 @@ const UpdateJob = () => {
         // console.log('totalApplicant:', totalApplicant);
         console.log("id: ", id);
 
-        const newJob = { bannerImgUrl, logoUrl, employerName, employerEmail, jobTitle, category, salarymin, salarymax, deadline, shortDes }
+        const newJob = { bannerImgUrl, logoUrl, employerName, jobTitle, category, salarymin, salarymax, deadline, shortDes }
 
         if (!bannerImgUrl) {
             swal("Warning", "Please enter a banner image URL", "warning");
@@ -88,16 +89,16 @@ const UpdateJob = () => {
             swal("shortDes", "Please enter a short description", "warning");
             return;
         }
-        // axiosJobFinder.post("/addajob", newJob)
-        //     .then(data => {
-        //         console.log(data.data)
-        //         if (data.data.insertedId) {
-        //             swal("Complete!", "added a new job!", "success");
-        //         }
-        //     }).catch(err => {
-        //         console.log(err);
-        //         swal("Error!", `${err.message}`, "error");
-        //     })
+        axiosJobFinder.patch(`/updatejob/${id}`, newJob)
+            .then(data => {
+                console.log(data.data)
+                if (data.data.modifiedCount) {
+                    swal("Complete!", "Updated a your job!", "success");
+                }
+            }).catch(err => {
+                console.log(err);
+                swal("Error!", `${err.message}`, "error");
+            })
 
     }
 
@@ -180,7 +181,7 @@ const UpdateJob = () => {
                                     <div className="border-[1px] border-gray-300 px-3 py-2 rounded">
                                         <input onChange={(e) => { setMin(e.target.value) }} name="salarymin" type="range" min="10000" max="1000000" defaultValue={data.salarymin} className="range range-xs range-primary" />
                                         <input onChange={(e) => { setmax(e.target.value) }} name="salarymin" type="range" min="10000" max="1000000" defaultValue={data.salarymax} className="range range-xs range-primary" />
-                                        <p className="text-sm">{data.salarymin}$ - {data.salarymax}$</p>
+                                        <p className="text-sm">{salarymin}$ - {salarymax}$</p>
                                     </div>
                                 </div>
                             </div>
