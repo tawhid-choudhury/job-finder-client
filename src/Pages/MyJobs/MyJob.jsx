@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const JobInTable = ({ job }) => {
-    const { _id, employerName, jobTitle, salarymin, salarymax, postDate, deadline, category } = job;
+const MyJob = ({ job, handledelete }) => {
+    const { _id, jobTitle, salarymin, salarymax, postDate, deadline, category } = job;
     const postDateObj = new Date(postDate);
     const deadlineObj = new Date(deadline);
     const postDay = postDateObj.getDate();
@@ -16,26 +16,25 @@ const JobInTable = ({ job }) => {
     const postDateString = `${postDay}-${postMonth}-${postYear}`;
     const deadlineDateString = `${deadlineDay}-${deadlineMonth}-${deadlineYear}`;
 
-
-
-    // const postDay = postDate?.getDate();
-    // const postMonth = postDate?.getMonth() + 1;
-    // const postYear = postDate?.getFullYear();
     return (
+
         <tr>
-            <td>{employerName}</td>
             <td>{jobTitle}</td>
             <td>{category}</td>
             <td>{postDateString}</td>
             <td>{deadlineDateString}</td>
             <td>{salarymin}$-{salarymax}$</td>
-            <td><Link to={`/job/${_id}`}><button onClick={() => console.log(_id)} className='btn btn-primary'>Details</button></Link></td>
+            <td><Link to={`/updateJob/${_id}`}><button onClick={() => console.log(_id)} className='btn btn-success'>Update</button></Link></td>
+            <td><Link><button onClick={() => handledelete(_id)} className='btn btn-error'>Delete</button></Link></td>
         </tr>
+
+
     );
 };
 
-JobInTable.propTypes = {
+MyJob.propTypes = {
     job: PropTypes.object,
+    handledelete: PropTypes.func,
 };
 
-export default JobInTable;
+export default MyJob;

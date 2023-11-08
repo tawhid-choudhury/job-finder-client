@@ -3,7 +3,7 @@ import StaticBanner from "../../sharedComponents/StaticBanner";
 import useJobById from "../../hooks/useJobById";
 import { Card } from "@material-tailwind/react";
 
-import { GiMoneyStack, GiAlarmClock } from "react-icons/gi";
+import { GiMoneyStack } from "react-icons/gi";
 const Jobdetails = () => {
     const { id } = useParams();
     console.log(id);
@@ -13,7 +13,7 @@ const Jobdetails = () => {
 
     if (error) return 'An error has occurred: ' + error.message
 
-    const { bannerImgUrl, employerName, employerEmail, totalApplicant, jobTitle, category, salarymin, salarymax, postDate, deadline, shortDes } = data;
+    const { bannerImgUrl, employerName, totalApplicant, jobTitle, category, salarymin, salarymax, postDate, deadline, shortDes } = data;
     const postDateObj = new Date(postDate);
     const deadlineObj = new Date(deadline);
     const postDay = postDateObj.getDate();
