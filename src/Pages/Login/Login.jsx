@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../sharedComponents/Logo";
 // import StaticBanner from "../../sharedComponents/StaticBanner";
 import { FcGoogle } from "react-icons/fc";
@@ -21,6 +21,7 @@ const Login = () => {
     const { loginEmailPass } = useContext(AuthContext)
     const [showPassword, toggleShowPassword] = useShowPassword();
     const nav = useNavigate();
+    const location = useLocation();
 
 
     const handlePasswordChange = (e) => {
@@ -36,7 +37,7 @@ const Login = () => {
         console.log(email, password);
         loginEmailPass(email, password)
             .then((uc) => {
-                console.log(uc);
+                console.log(location);
                 swal("Complete!", "Logged in!", "success");
                 nav(location?.state ? location.state : "/")
             }).catch((err) => {
