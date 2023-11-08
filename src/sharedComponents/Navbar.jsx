@@ -18,10 +18,10 @@ const Navbar = () => {
     return (
         <div className="bg-base-300 absolute w-full bg-opacity-0 text-base-100 z-20 navbar-sty">
             <div className="navbar custom-main-spacing">
-                <div className="navbar-start">
+                <div className="navbar-start w-3/4 ">
                     <div className="dropdown">
-                        <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                        <label tabIndex={0} className="btn btn-ghost btn-lg lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-[40px] w-[40px]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         {/* Website logo, Website name, Home, All Jobs, Applied Jobs, Add A Job, My Jobs(Jobs that a user has created through Add A Job page), Blogs, and User Profile.  */}
 
@@ -40,7 +40,7 @@ const Navbar = () => {
                     </div>
 
                     <div className="hidden lg:flex">
-                        <ul className=" menu-horizontal gap-6 px-5">
+                        <ul className=" menu-horizontal gap-3 ">
                             <li className="navItem"><NavLink to="/">Home</NavLink></li>
                             <li className="navItem"><NavLink to="/alljobs">All Jobs</NavLink></li>
                             <li className={`navItem ${!user && "hidden"}`}><NavLink to="/appliedjobs">Applied Jobs</NavLink></li>
@@ -52,7 +52,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="navbar-end">
-                    <div className="md:hidden">
+                    <div className="lg:hidden">
                         <div className="dropdown dropdown-bottom dropdown-end">
                             <label tabIndex={0} className="text-[40px]">{user ? <div className={`avatar ${!user && "hidden"}`}>
                                 <div className="w-[40px] border-base-100 border-2 rounded-full">
@@ -68,7 +68,7 @@ const Navbar = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className="hidden md:flex gap-5 items-center">
+                    <div className="hidden lg:flex gap-5 items-center">
                         <Tooltip content={user?.displayName} placement="bottom">
                             <div className={`avatar ${!user && "hidden"}`}>
                                 <div className="w-11 border-base-100 border-2 rounded-full text-xs bg-black">
@@ -77,6 +77,7 @@ const Navbar = () => {
                             </div>
                         </Tooltip>
                         <button onClick={handleLogout} className={`btn btn-primary btn-outline ${!user && "hidden"}`}>Log Out</button>
+                        <button><NavLink to='/profile' className={`hover:text-primary ${!user && "hidden"}`}>Profile</NavLink></button>
 
                         <button><NavLink to='/login' className={`btn btn-primary ${user && "hidden"}`}>Login</NavLink></button>
                         <h3 className={`${user && "hidden"}`}>or</h3>
