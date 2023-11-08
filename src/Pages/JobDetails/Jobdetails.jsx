@@ -70,7 +70,7 @@ const Jobdetails = () => {
         });
 
         const jobId = id;
-        const newApply = { applicant, applicantEmail, jobId, resumeUrl }
+        const newApply = { applicant, applicantEmail, jobId, resumeUrl, category }
 
         console.log(newApply);
 
