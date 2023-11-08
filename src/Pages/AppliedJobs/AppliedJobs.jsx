@@ -40,7 +40,7 @@ const AppliedJobs = () => {
     return (
         <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-error via-accent to-error animate-gradient top-0 py-36 px-5">
             <Helmet>
-                <title>Job Finder | All Jobs</title>
+                <title>Job Finder | Applied Jobs</title>
             </Helmet>
             <div>
                 <Card className="max-w-[400px] m-auto bg-white pt-5 rounded rounded-b-none">
