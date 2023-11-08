@@ -5,7 +5,7 @@ const useAllJobs = () => {
         {
             queryKey: ["tawhid_assignment10_allJobs"],
             queryFn: async () => {
-                const fetchedData = await fetch(`http://localhost:5000/alljobs`);
+                const fetchedData = await fetch(`https://assignment-11-server-one-psi.vercel.app/alljobs`);
                 return await fetchedData.json();
             }
         }

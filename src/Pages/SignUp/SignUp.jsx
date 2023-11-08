@@ -15,6 +15,7 @@ import swal from "sweetalert";
 import useAuthFunctions from "../../hooks/useAuthFunctions";
 import useShowPassword from "../../hooks/useShowPassword";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import axiosJobFinder from "../../api/axiosJobFinder";
 
 const SignUp = () => {
     const [name, handleNameChange] = useName();
@@ -23,7 +24,7 @@ const SignUp = () => {
     const [showPassword, toggleShowPassword] = useShowPassword();
     const [photoUrl, photoUrlOk, avater, imageloaded, setImageloaded, handlePhotoUrlChange] = usePhotoUrl();
     const [errorText, setErrorText] = useState("")
-    const [handleGoogle] = useAuthFunctions(setErrorText);
+    const [handleGoogle] = useAuthFunctions(setErrorText, email);
 
     const { signUpEmailPass, updateNamePhoto, setLoading } = useContext(AuthContext)
     const nav = useNavigate();
@@ -49,8 +50,15 @@ const SignUp = () => {
                 }).catch(err => {
                     console.log(err);
                 });
-                swal("Complete!", "Account Created!", "success");
-                nav("/")
+                const ue = { email };
+                axiosJobFinder.post("/jwt", ue, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.success) {
+                            swal("Complete!", "Account Created!", "success");
+                            nav(location?.state ? location.state : "/")
+                        }
+                    })
             }).catch((err) => {
                 if (err.code === "auth/email-already-in-use") {
                     swal("Error!", "Email is already in use. Please choose a different email.", "error");

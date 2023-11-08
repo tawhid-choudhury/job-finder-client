@@ -6,7 +6,7 @@ const useAppliedJobsById = (applicantEmail) => {
         {
             queryKey: ["tawhid_assignment10_applied_jobs_by_id"],
             queryFn: async () => {
-                const fetchedData = await fetch(`http://localhost:5000/allapplied?applicantEmail=${applicantEmail}`);
+                const fetchedData = await fetch(`https://assignment-11-server-one-psi.vercel.app/allapplied?applicantEmail=${applicantEmail}`);
                 return await fetchedData.json();
             }
         }
