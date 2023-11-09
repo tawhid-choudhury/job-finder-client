@@ -28,6 +28,9 @@ const Tabs = ({ data, filteredJobs, setFilteredJobs }) => {
     }
     return (
         <div className="py-10 custom-main-spacing">
+            <h1 className="text-4xl font-bold text-center my-5">
+                Browse Jobs
+            </h1>
             <div className="tabs justify-center">
                 <a onClick={() => handleTabChange(1, "")} className={`tab lg:tab-lg tab-bordered ${tabActive === 1 ? "tab-active" : ""}`}>All</a>
                 <a onClick={() => handleTabChange(2, "onsite")} className={`tab lg:tab-lg tab-bordered ${tabActive === 2 ? "tab-active" : ""}`}>On site</a>
@@ -35,7 +38,7 @@ const Tabs = ({ data, filteredJobs, setFilteredJobs }) => {
                 <a onClick={() => handleTabChange(4, "hybrid")} className={`tab lg:tab-lg tab-bordered ${tabActive === 4 ? "tab-active" : ""}`}>Hybrid</a>
                 <a onClick={() => handleTabChange(5, "parttime")} className={`tab lg:tab-lg tab-bordered ${tabActive === 5 ? "tab-active" : ""}`}>Part time</a>
             </div>
-            <div className="flex flex-wrap gap-5 my-10 items-center justify-center px-2">
+            <div className="flex flex-wrap gap-5 my-10 items-center justify-center px-2 min-h-[500px]">
                 {filteredJobs?.length ? (
                     filteredJobs.map((job) => (
                         <HomeCard job={job} key={job._id}></HomeCard>

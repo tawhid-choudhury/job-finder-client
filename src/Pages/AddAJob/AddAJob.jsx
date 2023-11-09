@@ -6,8 +6,9 @@ import Logo from "../../sharedComponents/Logo";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Datepicker } from "flowbite-react";
 import swal from "sweetalert";
-import axiosJobFinder from "../../api/axiosJobFinder";
+// import axiosJobFinder from "../../api/axiosJobFinder";
 import { Helmet } from "react-helmet-async";
+import useAxiosInstance from "../../hooks/axios/useAxiosInstance";
 // import axios from "axios";
 
 
@@ -19,6 +20,7 @@ const AddAJob = () => {
     // eslint-disable-next-line no-unused-vars
     const [postDate, setpostDate] = useState(new Date());
     const [deadline, setDeadline] = useState(new Date());
+    const axiosInstance = useAxiosInstance();
 
     const handleDatePickerChange = (date) => {
         date.setHours(23, 59, 59, 999);
@@ -72,7 +74,7 @@ const AddAJob = () => {
             swal("shortDes", "Please enter a short description", "warning");
             return;
         }
-        axiosJobFinder.post("/addajob", newJob)
+        axiosInstance.post("/addajob", newJob)
             .then(data => {
                 console.log(data.data)
                 if (data.data.insertedId) {
@@ -86,7 +88,7 @@ const AddAJob = () => {
     }
 
     return (
-        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-warning via-secondary to-warning animate-gradient top-0 py-36 px-5">
+        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-gray-600 via-accent to-blue-gray-600 animate-gradient top-0 py-36 px-5">
             <Helmet>
                 <title>Job Finder | Add a job</title>
             </Helmet>

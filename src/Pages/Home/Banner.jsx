@@ -17,7 +17,7 @@ const Banner = () => {
                     <div className="relative hero min-h-[75vh] animate-gradient-banner-home" style={{ backgroundImage: 'url(https://i.ibb.co/zs785ry/business-man-1572059-1920.jpg)' }}>
                         <div className="absolute w-full h-full bg-black bg-opacity-60 top-0">
                             <div className="flex flex-col items-center justify-center h-full text-white">
-                                <h1 className=" text-lg sm:text-xl md:text-3xl lg:text-4xl text-center">We are the best job provider in the country!</h1>
+                                <h1 className=" text-lg sm:text-xl md:text-3xl lg:text-4xl text-center">Join our team of satisfied employees at Job Finder SYL!</h1>
                                 <p className="pt-2">Find the job that your heart desires</p>
 
                             </div>

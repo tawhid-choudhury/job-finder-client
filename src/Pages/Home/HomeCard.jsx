@@ -3,8 +3,8 @@ import { Card } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 
 const HomeCard = ({ job }) => {
-    const { _id, jobTitle, salarymin, salarymax, postDate, deadline, category, logoUrl } = job;
-    const postDateObj = new Date(postDate);
+    const { _id, jobTitle, salarymin, salarymax, deadline, category, logoUrl } = job;
+    // const postDateObj = new Date(postDate);
     const deadlineObj = new Date(deadline);
     // const postDay = postDateObj.getDate();
     // const postMonth = postDateObj.getMonth() + 1;
@@ -13,7 +13,7 @@ const HomeCard = ({ job }) => {
     const deadlineDay = deadlineObj.getDate();
     const deadlineMonth = deadlineObj.getMonth() + 1;
     const deadlineYear = deadlineObj.getFullYear();
-    console.log(typeof postDateObj);
+    // console.log(typeof postDateObj);
     // const postDateString = `${postDay}-${postMonth}-${postYear}`;
     const deadlineDateString = `${deadlineDay}-${deadlineMonth}-${deadlineYear}`;
 
@@ -26,7 +26,6 @@ const HomeCard = ({ job }) => {
                         <h1 className='font-bold text-lg'>{jobTitle}</h1>
                         <h1 className='text-sm'>Salary :{salarymin}$-{salarymax}$</h1>
                         <h1 className='text-sm'>Type :{category}</h1>
-                        {/* className='text-sm' <h1>{postDateString}</h1> */}
                         <h1 className='text-sm'>Deadline: {deadlineDateString}</h1>
                         <h1 className='text-sm'><Link to={`/job/${_id}`}><button onClick={() => console.log(_id)} className='btn btn-primary'>Details</button></Link></h1>
                     </div>

@@ -7,7 +7,7 @@ const AppliedJobTableItem = ({ id }) => {
     console.log(id);
 
     const { isPending, error, data, } = useJobById(id)
-    if (isPending) return <div className='flex justify-center items-center min-h-screen bg-gray-600'><span className="loading loading-spinner loading-lg "></span></div>
+    if (isPending) return <tr className='flex justify-center items-center min-h-screen bg-gray-600'><span className="loading loading-spinner loading-lg "></span></tr>
 
     if (error) return (
         <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-yellow-500 via-warning to-yellow-400 animate-gradient flex items-center justify-around px-5">

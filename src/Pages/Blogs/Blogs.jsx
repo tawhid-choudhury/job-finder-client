@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 
 const Blogs = () => {
     return (
-        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-800 via-accent to-error animate-gradient top-0 py-36 px-5">
+        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-800 via-accent to-blue-800 animate-gradient top-0 py-36 px-5">
             <Helmet>
                 <title>Job Finder | blogs</title>
             </Helmet>

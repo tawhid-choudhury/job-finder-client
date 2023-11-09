@@ -21,7 +21,7 @@ const Contact = () => {
                 <div>
                     <h1 className='text-3xl'>Lets arrange a meeting</h1>
                     <p className='my-4'>Feel free to contact us anytime</p>
-                    <p className=' w-full mt-10 pt-3'>Email: example@email.com</p>
+                    <p className=' w-full mt-10 pt-3'>Email: job.finder.syl@jfs.com</p>
                     <div className="divider"></div>
                     <p className=' w-full mt-10 pt-3'>Phone: (123) 456-7890</p>
                     <div className="divider"></div>
@@ -29,9 +29,11 @@ const Contact = () => {
                     <div className="divider"></div>
                 </div>
                 <div>
-                    <h1 className='text-3xl'>Send an Email </h1>
-                    <h1 className='my-4'>Sending Email as: </h1>
-                    <h1 className='w-full border-[1px] p-3'>{user?.email}</h1>
+                    <h1 className='text-3xl'>Send a Message </h1>
+                    <h1 className='my-4'>Sending Message as: </h1>
+                    <h1 className='w-full mt-10 pt-3'>{user?.displayName}</h1>
+                    <div className="divider"></div>
+
                     <form onSubmit={handleSub}>
                         <textarea name='message' className=' w-full pt-5 mt-6 border-[1px] border-gray-600 h-[200px]' type="text" placeholder='Write your message here'>
                         </textarea>

@@ -29,20 +29,16 @@ const AllJobs = () => {
     )
 
     return (
-        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-success via-warning to-success animate-gradient top-0 py-36 px-5">
+        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-accent via-blue-800 to-accent animate-gradient top-0 pt-36">
             <Helmet>
                 <title>Job Finder | All Jobs</title>
             </Helmet>
             <div>
-                <Card className="max-w-[400px] m-auto bg-white pt-5 rounded rounded-b-none">
-                    <div className="pt-3 hidden lg:block">
-                        {/* <Logo></Logo> */}
-                    </div>
-                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary flex items-center justify-center ">
+
+                <Card className="max-w-[100%] m-auto bg-white rounded rounded-b-none p-5 mt-10">
+                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary flex items-center justify-center py-10">
                         Browse All jobs
                     </h1>
-                </Card>
-                <Card className="max-w-[100%] m-auto bg-white rounded rounded-b-none p-5 ">
                     <div className="form-control w-full rounded">
                         <div className="flex w-full max-w-5xl mx-auto rounded">
                             <input
@@ -56,9 +52,9 @@ const AllJobs = () => {
                     </div>
 
                 </Card>
-                <Card className="max-w-[100%] m-auto bg-white rounded rounded-t-none py-5">
+                <Card className="max-w-[100%] m-auto bg-white rounded rounded-t-none py-5 min-h-screen">
                     <div className="overflow-x-auto p-4">
-                        <table className="table">
+                        <table className="table max-w-[1600px] m-auto">
                             {/* head */}
                             <thead>
                                 <tr>

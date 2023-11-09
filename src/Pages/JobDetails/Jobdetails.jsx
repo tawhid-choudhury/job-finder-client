@@ -9,8 +9,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import swal from "sweetalert";
 import Swal from 'sweetalert2'
-import axiosJobFinder from "../../api/axiosJobFinder";
+// import axiosJobFinder from "../../api/axiosJobFinder";
+import useAxiosInstance from "../../hooks/axios/useAxiosInstance";
+
+
 const Jobdetails = () => {
+    const axiosInstance = useAxiosInstance();
+
     const { user } = useContext(AuthContext);
     const { id } = useParams();
     console.log(id);
@@ -74,7 +79,7 @@ const Jobdetails = () => {
 
         console.log(newApply);
 
-        axiosJobFinder.post("/appliedjobs", newApply)
+        axiosInstance.post("/appliedjobs", newApply)
             .then(data => {
                 console.log(data.data)
                 if (data.data.result.insertedId) {

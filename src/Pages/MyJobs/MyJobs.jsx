@@ -3,12 +3,14 @@ import { Card } from "@material-tailwind/react";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import MyJob from "./MyJob";
-import axiosJobFinder from "../../api/axiosJobFinder";
+// import axiosJobFinder from "../../api/axiosJobFinder";
 import swal from "sweetalert";
 import { Helmet } from "react-helmet-async";
+import useAxiosInstance from "../../hooks/axios/useAxiosInstance";
 
 
 const MyJobs = () => {
+    const axiosInstance = useAxiosInstance();
     const { user } = useContext(AuthContext)
     const [data, setData] = useState([]);
     // const { isPending, error, data, refetch } = useEmailFilterForMyJobs(user.email);
@@ -24,14 +26,14 @@ const MyJobs = () => {
     //     </div>
     // )
     useEffect(() => {
-        axiosJobFinder.get(`/alljobspersonal?employerEmail=${user.email}`, { withCredentials: true })
+        axiosInstance.get(`/alljobspersonal?employerEmail=${user.email}`)
             .then(res => {
                 setData(res.data)
             })
     }, [user.email])
 
     const handledelete = (id) => {
-        axiosJobFinder.delete(`/alljobs/${id}`)
+        axiosInstance.delete(`/alljobs/${id}`)
             .then(res => {
                 console.log(res.data);
                 if (res.data.deletedCount === 1) {
@@ -46,22 +48,17 @@ const MyJobs = () => {
 
     console.log(data);
     return (
-        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-l from-blue-900 via-red-500 to-blue-900 animate-gradient top-0 py-36 px-5">
+        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-l from-blue-900 via-red-500 to-blue-900 animate-gradient top-0 pt-36">
             <Helmet>
                 <title>Job Finder | My Jobs</title>
             </Helmet>
             <div>
-                <Card className="max-w-[400px] m-auto bg-white pt-5 rounded rounded-b-none">
-                    <div className="pt-3 hidden lg:block">
-                        {/* <Logo></Logo> */}
-                    </div>
-                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary flex items-center justify-center ">
-                        My Jobs
+                <Card className="max-w-[100%] min-h-screen m-auto bg-white rounded rounded-b-none p-5 mt-10">
+                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary flex items-center justify-center py-10">
+                        Your Posted Jobs
                     </h1>
-                </Card>
-                <Card className="max-w-[100%] m-auto bg-white rounded  py-5">
                     <div className="overflow-x-auto p-4">
-                        <table className="table">
+                        <table className="table max-w-[1600px] m-auto">
                             {/* head */}
                             <thead>
                                 <tr>

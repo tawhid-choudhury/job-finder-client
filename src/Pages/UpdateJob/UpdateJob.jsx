@@ -6,12 +6,13 @@ import swal from "sweetalert";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Logo from "../../sharedComponents/Logo";
-import axiosJobFinder from "../../api/axiosJobFinder";
+// import axiosJobFinder from "../../api/axiosJobFinder";
 import { Card } from "@material-tailwind/react";
+import useAxiosInstance from "../../hooks/axios/useAxiosInstance";
 
 const UpdateJob = () => {
 
-
+    const axiosInstance = useAxiosInstance();
     const { id } = useParams();
     const { user } = useContext(AuthContext);
     const [salarymin, setMin] = useState("200000");
@@ -31,7 +32,7 @@ const UpdateJob = () => {
 
     if (error) return (
         <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-yellow-500 via-warning to-yellow-400 animate-gradient flex items-center justify-around px-5">
-            <Card className="max-w-[600px] m-auto bg-white pt-5 rounded grid lg:grid-cols-2 items-center justify-around p-9">
+            <Card className="max-w-[600px] m-auto pt-5 rounded grid lg:grid-cols-2 items-center justify-around p-9">
                 <p className="text-xl  font-bold text-center">An error has occurred: <br />{error.message}</p>
                 <img src="https://i.ibb.co/sVwMWV2/stitch-sad-sad-stitch.gif" alt="" />
             </Card>
@@ -97,7 +98,7 @@ const UpdateJob = () => {
             swal("shortDes", "Please enter a short description", "warning");
             return;
         }
-        axiosJobFinder.patch(`/updatejob/${id}`, newJob)
+        axiosInstance.patch(`/updatejob/${id}`, newJob)
             .then(data => {
                 console.log(data.data)
                 if (data.data.modifiedCount) {
@@ -113,7 +114,7 @@ const UpdateJob = () => {
 
 
     return (
-        <div>
+        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-gray-600 via-accent to-blue-gray-600 animate-gradient top-0 py-36 px-5">
             <Helmet>
                 <title>Job Finder | Update {jobTitle}</title>
             </Helmet>
@@ -222,7 +223,7 @@ const UpdateJob = () => {
                         <textarea defaultValue={shortDes} type="text" placeholder="Short Description" name="shortDes" className="textarea textarea-bordered rounded w-full"></textarea>
                     </div>
                     <p className="font-bold mt-7">total applicants: {totalApplicant}</p>
-                    <input type="submit" value="Add" className="btn btn-block btn-primary mb-7 " />
+                    <input type="submit" value="Update" className="btn btn-block btn-primary mb-7 " />
 
                 </form>
 

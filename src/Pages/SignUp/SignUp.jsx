@@ -15,9 +15,11 @@ import swal from "sweetalert";
 import useAuthFunctions from "../../hooks/useAuthFunctions";
 import useShowPassword from "../../hooks/useShowPassword";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import axiosJobFinder from "../../api/axiosJobFinder";
+// import useAxiosInstance from "../../hooks/axios/useAxiosInstance";
+// import axiosJobFinder from "../../api/axiosJobFinder";
 
 const SignUp = () => {
+    // const axiosInstance = useAxiosInstance();
     const [name, handleNameChange] = useName();
     const [email, emailOk, handleEmailChange] = useEmailSignUp();
     const [password, passwordOk, passfocused, setpassFocused, handlePasswordChange] = usePasswordSignUp();
@@ -50,15 +52,8 @@ const SignUp = () => {
                 }).catch(err => {
                     console.log(err);
                 });
-                const ue = { email };
-                axiosJobFinder.post("/jwt", ue, { withCredentials: true })
-                    .then(res => {
-                        console.log(res.data);
-                        if (res.data.success) {
-                            swal("Complete!", "Account Created!", "success");
-                            nav(location?.state ? location.state : "/")
-                        }
-                    })
+                swal("Complete!", "Account Created!", "success");
+                nav("/")
             }).catch((err) => {
                 if (err.code === "auth/email-already-in-use") {
                     swal("Error!", "Email is already in use. Please choose a different email.", "error");
@@ -78,7 +73,7 @@ const SignUp = () => {
                 <title>Job Finder | Sign Up</title>
             </Helmet>
             {/* <StaticBanner></StaticBanner> */}
-            <div className=" flex flex-col gap-5 items-center justify-center min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-500 via-success to-primary animate-gradient top-0 px-2">
+            <div className=" flex flex-col gap-5 items-center justify-center min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r  from-blue-800 via-accent to-blue-800 animate-gradient top-0 px-2">
                 <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 my-20 rounded-md">
                     <form className="card-body space-y-4 pb-0" onSubmit={handleSubmit}>
                         <div className="pt-3 hidden lg:block">
