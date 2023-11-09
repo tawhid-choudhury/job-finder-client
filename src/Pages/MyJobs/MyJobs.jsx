@@ -61,6 +61,10 @@ const MyJobs = () => {
                                 text: "Your file has been deleted.",
                                 icon: "success"
                             });
+                            axiosInstance.get(`/alljobspersonal?employerEmail=${user.email}`)
+                                .then(res => {
+                                    setData(res.data)
+                                })
                         }
                     }).catch(err => {
                         console.log(err);
@@ -74,7 +78,7 @@ const MyJobs = () => {
             ) {
                 swalWithBootstrapButtons.fire({
                     title: "Cancelled",
-                    text: "Your imaginary file is safe :)",
+                    text: "Delete canceled",
                     icon: "error"
                 });
             }
