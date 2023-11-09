@@ -7,6 +7,7 @@ import MyJob from "./MyJob";
 import swal from "sweetalert";
 import { Helmet } from "react-helmet-async";
 import useAxiosInstance from "../../hooks/axios/useAxiosInstance";
+import Swal from "sweetalert2";
 
 
 const MyJobs = () => {
@@ -33,17 +34,51 @@ const MyJobs = () => {
     }, [user.email])
 
     const handledelete = (id) => {
-        axiosInstance.delete(`/alljobs/${id}`)
-            .then(res => {
-                console.log(res.data);
-                if (res.data.deletedCount === 1) {
-                    // refetch();
-                    swal("Deleted", "", "success");
-                }
-            }).catch(err => {
-                console.log(err);
-                swal("Error", `${err.message}`, "error");
-            })
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-error",
+                cancelButton: "btn btn-success"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosInstance.delete(`/alljobs/${id}`)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.deletedCount === 1) {
+                            // refetch();
+                            swalWithBootstrapButtons.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        swal("Error", `${err.message}`, "error");
+                    })
+
+
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
+                    text: "Your imaginary file is safe :)",
+                    icon: "error"
+                });
+            }
+        });
     }
 
     console.log(data);
