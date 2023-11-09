@@ -6,6 +6,8 @@ import { AuthContext } from "../../providers/AuthProvider";
 import AppliedJobTableItem from "./AppliedJobTableItem";
 // import axiosJobFinder from "../../api/axiosJobFinder";
 import useAxiosInstance from "../../hooks/axios/useAxiosInstance";
+import { usePDF } from "react-to-pdf";
+
 
 
 const AppliedJobs = () => {
@@ -13,6 +15,7 @@ const AppliedJobs = () => {
     // const { isPending, error, data } = useAppliedJobsById(user.email);
     const [data, setData] = useState([]);
     const axiosInstance = useAxiosInstance();
+    const { toPDF, targetRef } = usePDF({ filename: `${user.displayName} Applied Jobs.pdf` })
 
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredJobs, setFilteredJobs] = useState(data);
@@ -48,15 +51,19 @@ const AppliedJobs = () => {
     // console.log(data);
     data.map(ap => console.log(ap.jobId))
     return (
-        <div className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-800 via-accent to-blue-800 animate-gradient top-0 pt-36">
+        <div ref={targetRef} className="min-w-full min-h-screen bg-opacity-50 w-full h-full bg-gradient-to-r from-blue-800 via-accent to-blue-800 animate-gradient top-0 pt-36">
             <Helmet>
                 <title>Job Finder | Applied Jobs</title>
             </Helmet>
-            <div>
+
+            <div className="">
                 <Card className="max-w-[100%] m-auto bg-white rounded rounded-b-none p-5 mt-10">
-                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary flex items-center justify-center py-10">
-                        Your Applied Jobs
-                    </h1>
+                    <div className="flex flex-col justify-center items-center py-5">
+                        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary flex items-center justify-center py-5">
+                            Your Applied Jobs
+                        </h1>
+                        <button className="btn btn-primary" onClick={() => toPDF()}>Download PDF</button>
+                    </div>
                     <div className="form-control w-full rounded">
                         <div className="flex w-full max-w-5xl mx-auto rounded">
                             <select
