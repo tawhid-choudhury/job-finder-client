@@ -1,4 +1,4 @@
-live-link: https://jobfindersyl.web.app/addajob
+live-link: https://jobfindersyl.web.app/
 
 Features:
 
