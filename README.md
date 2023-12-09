@@ -44,10 +44,10 @@ Explore JOBFINDERSYL, an innovative online job hunting platform designed to stre
 
 ### How to Run Locally:
 
-1. Clone the repository: `git clone https://github.com/your-username/JOBFINDERSYL.git`
-2. Navigate to the project directory: `cd JOBFINDERSYL`
+1. Clone the repository: `git clone https://github.com/tawhid-choudhury/job-finder-client.git`
+2. Navigate to the project directory: `cd job-finder-client`
 3. Install dependencies: `npm install`
-4. Run the project locally: `npm start`
+4. Run the project locally: `npm run dev`
 
 ### Backend Repository:
 
